@@ -21,3 +21,14 @@ export async function createProduct(productData: never) {
   const data = await response.json();
   console.log(data);
 }
+
+export async function deleteProduct(id: string) {
+  const res = await fetch(`http://localhost:4000/api/products/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  return res.json();
+}

@@ -8,8 +8,17 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { deleteProduct } from '@/app/products/products.api';
+import { useRouter } from 'next/navigation';
 
 function ProductCard({ product }: any) {
+  const router = useRouter();
+
+  async function handleRemoveProduct(productId) {
+    await deleteProduct(productId);
+    router.refresh();
+  }
+
   return (
     <Card key={product.id}>
       <CardHeader>
@@ -33,7 +42,11 @@ function ProductCard({ product }: any) {
       <CardFooter className='flex justify-between'>
         <Button className='mt-5'>Comprar</Button>
 
-        <Button className='mt-5' variant='destructive'>
+        <Button
+          className='mt-5'
+          variant='destructive'
+          onClick={() => handleRemoveProduct(product.id)}
+        >
           Eliminar
         </Button>
       </CardFooter>
