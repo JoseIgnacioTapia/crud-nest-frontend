@@ -5,6 +5,18 @@ export async function getProducts() {
   return await data.json();
 }
 
+export async function getProduct(id: string) {
+  const data = await fetch(`http://localhost:4000/api/products/${id}`, {
+    cache: 'no-store',
+  });
+
+  if (!data.ok) {
+    throw new Error('Failed to fetch product');
+  }
+
+  return await data.json();
+}
+
 export async function createProduct(productData: never) {
   const response = await fetch('http://localhost:4000/api/products', {
     method: 'POST',
