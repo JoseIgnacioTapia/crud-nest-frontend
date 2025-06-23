@@ -58,7 +58,10 @@ function ProductCard({ product }: any) {
         <Button
           className='mt-5'
           variant='destructive'
-          onClick={() => handleRemoveProduct(product.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemoveProduct(product.id);
+          }}
         >
           Eliminar
         </Button>
