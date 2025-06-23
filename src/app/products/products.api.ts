@@ -1,5 +1,8 @@
+export const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
+
 export async function getProducts() {
-  const data = await fetch('http://localhost:4000/api/products', {
+  const data = await fetch(`${BACKEND_URL}/api/products`, {
     cache: 'no-store',
   });
   return await data.json();
@@ -8,7 +11,7 @@ export async function getProducts() {
 export async function getProduct(id: string | null) {
   if (!id) return null;
 
-  const data = await fetch(`http://localhost:4000/api/products/${id}`, {
+  const data = await fetch(`${BACKEND_URL}/api/products/${id}`, {
     cache: 'no-store',
   });
 
@@ -20,7 +23,7 @@ export async function getProduct(id: string | null) {
 }
 
 export async function createProduct(productData: any) {
-  const response = await fetch('http://localhost:4000/api/products', {
+  const response = await fetch(`${BACKEND_URL}/api/products`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -37,7 +40,7 @@ export async function createProduct(productData: any) {
 }
 
 export async function deleteProduct(id: string) {
-  const res = await fetch(`http://localhost:4000/api/products/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/api/products/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +51,7 @@ export async function deleteProduct(id: string) {
 }
 
 export async function updateProduct(id: string, newProduct: any) {
-  const response = await fetch(`http://localhost:4000/api/products/${id}`, {
+  const response = await fetch(`${BACKEND_URL}/api/products/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
