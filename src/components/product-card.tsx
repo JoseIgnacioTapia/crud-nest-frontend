@@ -45,7 +45,15 @@ function ProductCard({ product }: any) {
         <p>{product.description}</p>
       </CardContent>
       <CardFooter className='flex justify-between'>
-        <Button className='mt-5'>Comprar</Button>
+        <Button
+          className='mt-5'
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/products/${product.id}/edit`);
+          }}
+        >
+          Editar
+        </Button>
 
         <Button
           className='mt-5'

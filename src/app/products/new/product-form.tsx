@@ -4,11 +4,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { createProduct } from '../products.api';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
-function ProductForm() {
-  const { register, handleSubmit } = useForm();
+function ProductForm({ product }: any) {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: product?.name || '',
+      description: product?.description || '',
+      price: product?.price || '',
+      image: product?.image || '',
+    },
+  });
   const router = useRouter();
+  const params = useParams();
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
@@ -32,7 +40,7 @@ function ProductForm() {
       <Label>Image</Label>
       <Input className='border' {...register('image')} />
 
-      <Button>Create Product</Button>
+      <Button>{params.id ? 'Update Product' : 'Create Product'}</Button>
     </form>
   );
 }

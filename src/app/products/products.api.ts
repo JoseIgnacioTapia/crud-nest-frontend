@@ -5,19 +5,21 @@ export async function getProducts() {
   return await data.json();
 }
 
-export async function getProduct(id: string) {
+export async function getProduct(id: string | null) {
+  if (!id) return null;
+
   const data = await fetch(`http://localhost:4000/api/products/${id}`, {
     cache: 'no-store',
   });
 
   if (!data.ok) {
-    throw new Error('Failed to fetch product');
+    return null;
   }
 
   return await data.json();
 }
 
-export async function createProduct(productData: never) {
+export async function createProduct(productData: any) {
   const response = await fetch('http://localhost:4000/api/products', {
     method: 'POST',
     headers: {
